@@ -10,5 +10,22 @@ namespace day1
 		{
 			return 3; 
 		}
+
+		public int CheckConsecutiveDigits(string puzzle)
+		{
+			int consecutiveValue = 0;
+			for (int i = 0; i < puzzle.Length; i++)
+			{
+				if (i != puzzle.Length-1)
+					if (puzzle[i] == puzzle[i + 1])
+						consecutiveValue += (int)Char.GetNumericValue(puzzle[i]);
+			}
+			return consecutiveValue;
+		}
+
+		public int CheckEndMatchFirst(string digits)
+		{
+			return 1; 
+		}
 	}
 }

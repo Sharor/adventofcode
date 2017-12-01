@@ -19,6 +19,9 @@ namespace day1test
 		public void PuzzleExample2()
 		{
 			string puzzle = "1111";
+			CaptchaEvaluator captcha = new CaptchaEvaluator();
+			int notAHuman = captcha.EvaluateCaptcha(puzzle);
+			Assert.Equal(notAHuman, 3); //4
 		}
 
 		[Fact]
