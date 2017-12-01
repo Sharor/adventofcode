@@ -8,7 +8,7 @@ namespace day1
 	{
 		public int EvaluateCaptcha(string puzzle)
 		{
-			return 3; 
+			return CheckConsecutiveDigits(puzzle) + CheckEndMatchFirst(puzzle);  
 		}
 
 		public int CheckConsecutiveDigits(string puzzle)
@@ -25,7 +25,10 @@ namespace day1
 
 		public int CheckEndMatchFirst(string digits)
 		{
-			return 1; 
+			if (digits[0] == digits[digits.Length - 1])
+				return (int)Char.GetNumericValue(digits[0]);
+			else
+				return 0; 
 		}
 	}
 }

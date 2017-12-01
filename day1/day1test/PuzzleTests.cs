@@ -21,19 +21,25 @@ namespace day1test
 			string puzzle = "1111";
 			CaptchaEvaluator captcha = new CaptchaEvaluator();
 			int notAHuman = captcha.EvaluateCaptcha(puzzle);
-			Assert.Equal(notAHuman, 3); //4
+			Assert.Equal(notAHuman, 4);
 		}
 
 		[Fact]
 		public void PuzzleExample3()
 		{
 			string puzzle = "1234";
+			CaptchaEvaluator captcha = new CaptchaEvaluator();
+			int notAHuman = captcha.EvaluateCaptcha(puzzle);
+			Assert.Equal(notAHuman, 0);
 		}
 
 		[Fact]
 		public void PuzzleExample4()
 		{
 			string puzzle = "91212129";
+			CaptchaEvaluator captcha = new CaptchaEvaluator();
+			int notAHuman = captcha.EvaluateCaptcha(puzzle);
+			Assert.Equal(notAHuman, 9);
 		}
 	}
 }

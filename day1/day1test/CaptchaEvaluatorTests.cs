@@ -44,11 +44,5 @@ namespace day1test
 			int digitsResult = captcha.CheckEndMatchFirst(digits);
 			Assert.Equal(digitsResult, 1);
 		}
-
-		[Fact]
-		public void PuzzleExample4()
-		{
-			string puzzle = "91212129";
-		}
 	}
 }
