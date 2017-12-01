@@ -6,7 +6,9 @@ namespace day1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+			CaptchaEvaluator captcha = new CaptchaEvaluator();
+			Console.WriteLine("Captcha for the given puzzle is: " + captcha.EvaluateCaptcha(new Puzzle().puzzle));
+			Console.Read(); 
         }
     }
 }
