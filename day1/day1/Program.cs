@@ -8,7 +8,9 @@ namespace day1
         {
 			CaptchaEvaluator captcha = new CaptchaEvaluator();
 			Console.WriteLine("Captcha for the given puzzle is: " + captcha.EvaluateCaptcha(new Puzzle().puzzle));
-			Console.Read(); 
+			AdvancedCaptchaEvaluator advancedCaptchaEvaluator = new AdvancedCaptchaEvaluator();
+			Console.WriteLine("Captcha for the given puzzle is: " + advancedCaptchaEvaluator.EvaluateCaptcha(new Puzzle().puzzle));
+			Console.Read();
         }
     }
 }
