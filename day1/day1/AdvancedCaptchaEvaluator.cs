@@ -22,13 +22,13 @@ namespace day1
 				{
 					if(i+midway>puzzle.Length-1)
 					{
-						if(puzzle[i]==puzzle[puzzle.Length-i])
+						if(puzzle[i]==puzzle[midway+i-puzzle.Length])
 							consecutiveValue += (int)Char.GetNumericValue(puzzle[i]);
 					}
 					else
 					{
 						if(puzzle[i]==puzzle[i+midway])
-						consecutiveValue += (int)Char.GetNumericValue(puzzle[i]);
+							consecutiveValue += (int)Char.GetNumericValue(puzzle[i]);
 					}
 						
 				}
