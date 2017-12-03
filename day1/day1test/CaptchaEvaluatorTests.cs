@@ -27,6 +27,9 @@ namespace day1test
 			Assert.Equal(digitsResult, 3);
 		}
 
+		/// <summary>
+		/// This is 6 since the test ignores the "edge case" of last digit linking to first digit
+		/// </summary>
 		[Fact]
 		public void MultiDigitsTwo()
 		{
