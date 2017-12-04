@@ -118,7 +118,7 @@ namespace day3
 			total += grid[i, j + 1].Value;
 			//right bot
 			total += grid[i + 1, j + 1].Value;
-			return total; 
+			return total;
 		}
 		/// <summary>
 		/// m x x
@@ -148,14 +148,14 @@ namespace day3
 			//straight top
 			total += grid[i, j - 1].Value;
 			//right top
-			total += grid[i + 1, j - 1].Value;			
+			total += grid[i + 1, j - 1].Value;
 			//right
-			total += grid[i + 1, j].Value;			
+			total += grid[i + 1, j].Value;
 			//straight bot
 			total += grid[i, j + 1].Value;
 			//right bot
 			total += grid[i + 1, j + 1].Value;
-			return total; 
+			return total;
 		}
 
 		/// <summary>
@@ -172,7 +172,7 @@ namespace day3
 			total += grid[i + 1, j - 1].Value;
 			//right
 			total += grid[i + 1, j].Value;
-			return total; 
+			return total;
 		}
 
 		/// <summary>
@@ -207,10 +207,10 @@ namespace day3
 			//left top
 			total += grid[i - 1, j - 1].Value;
 			//straight top
-			total += grid[i, j - 1].Value;			
+			total += grid[i, j - 1].Value;
 			//left
-			total += grid[i - 1, j].Value;			
-			return total; 
+			total += grid[i - 1, j].Value;
+			return total;
 		}
 
 		/// <summary>
@@ -224,13 +224,13 @@ namespace day3
 			//left top
 			total += grid[i - 1, j - 1].Value;
 			//straight top
-			total += grid[i, j - 1].Value;			
+			total += grid[i, j - 1].Value;
 			//left
-			total += grid[i - 1, j].Value;			
+			total += grid[i - 1, j].Value;
 			//left bot
 			total += grid[i - 1, j + 1].Value;
 			//straight bot
-			total += grid[i, j + 1].Value;			
+			total += grid[i, j + 1].Value;
 			return total;
 		}
 
@@ -241,13 +241,13 @@ namespace day3
 		/// </summary>
 		int RightCornerX(int i, int j)
 		{
-			int total = 0;			
+			int total = 0;
 			//left
-			total += grid[i - 1, j].Value;			
+			total += grid[i - 1, j].Value;
 			//left bot
 			total += grid[i - 1, j + 1].Value;
 			//straight bot
-			total += grid[i, j + 1].Value;			
+			total += grid[i, j + 1].Value;
 			return total;
 		}
 
@@ -258,7 +258,7 @@ namespace day3
 		/// </summary>
 		int TopGridEdgeX(int i, int j)
 		{
-			int total = 0; 
+			int total = 0;
 			//left
 			total += grid[i - 1, j].Value;
 			//right
@@ -274,33 +274,32 @@ namespace day3
 
 		int GetMatrixValues(int i, int j)
 		{
-			int gridcorner = gridsize - 1; 
+			int gridcorner = gridsize - 1;
 
 			if (i != 0 && j != 0 && i != gridcorner && j != gridcorner)
-				return FullGrid(i, j);	
+				return FullGrid(i, j);
 			if (i == 0 && j == 0)
 				return LeftCornerX(i, j);
-			if (i==0&&j!=0 && j!= gridcorner)
-				return LeftEdgeX(i, j); 
-			if(i==0&&j==gridcorner)
-				return LeftGridCornerX(i, j); 
-			if (i != 0 && i!=gridcorner && j == gridcorner)
-				return BotGridEdgeX(i, j); 
+			if (i == 0 && j != 0 && j != gridcorner)
+				return LeftEdgeX(i, j);
+			if (i == 0 && j == gridcorner)
+				return LeftGridCornerX(i, j);
+			if (i != 0 && i != gridcorner && j == gridcorner)
+				return BotGridEdgeX(i, j);
 			if (i == gridcorner && j == gridcorner)
-				return RightGridCornerX(i, j); 
+				return RightGridCornerX(i, j);
 			if (i == gridcorner && j != 0 && j != gridcorner)
 				return RightEdgeX(i, j);
 			if (i == gridcorner && j == 0)
 				return RightCornerX(i, j);
 			if (i != 0 && i != gridcorner && j == 0)
-				return TopGridEdgeX(i, j); 
+				return TopGridEdgeX(i, j);
 			return 0;
 		}
 
-		public void CreateAdvancedGrid(int size)
+		public int CreateAdvancedGrid(int size, int valueLock)
 		{
 			SetupBasicGrid(size);
-
 
 			grid[origin, origin] = new Coordinates(origin, origin, 1);
 			grid[origin + 1, origin] = new Coordinates(origin + 1, origin, 1);
@@ -310,27 +309,34 @@ namespace day3
 			Direction current = Direction.left;
 			Coordinates previous = grid[origin + 1, origin - 1];
 
-			///Problem is you only count steps for one side, not a whole "spiral". Change stepcoutner and handle edge case around1. 
 			for (int i = 4; i <= size; i++)
 			{
 				switch (current)
 				{
 					case Direction.up:
+						if (previous.Value > valueLock)
+							return previous.Value;
 						grid[previous.X, previous.Y - 1] = new Coordinates(previous.X, previous.Y - 1,
 							GetMatrixValues(previous.X, previous.Y - 1));
 						previous = grid[previous.X, previous.Y - 1];
 						break;
 					case Direction.down:
+						if (previous.Value > valueLock)
+							return previous.Value;
 						grid[previous.X, previous.Y + 1] = new Coordinates(previous.X, previous.Y + 1,
-							GetMatrixValues(previous.X, previous.Y + 1));
+						GetMatrixValues(previous.X, previous.Y + 1));
 						previous = grid[previous.X, previous.Y + 1];
 						break;
 					case Direction.right:
+						if (previous.Value > valueLock)
+							return previous.Value;
 						grid[previous.X + 1, previous.Y] = new Coordinates(previous.X + 1, previous.Y,
 							GetMatrixValues(previous.X + 1, previous.Y));
 						previous = grid[previous.X + 1, previous.Y];
 						break;
 					case Direction.left:
+						if (previous.Value > valueLock)
+							return previous.Value;
 						grid[previous.X - 1, previous.Y] = new Coordinates(previous.X - 1, previous.Y,
 							GetMatrixValues(previous.X - 1, previous.Y));
 						previous = grid[previous.X - 1, previous.Y];
@@ -352,6 +358,8 @@ namespace day3
 					else if (current == Direction.right && i != size)
 					{
 						i++;
+						if (previous.Value > valueLock)
+							return previous.Value;
 						grid[previous.X + 1, previous.Y] = new Coordinates(previous.X + 1, previous.Y,
 							GetMatrixValues(previous.X + 1, previous.Y));
 						previous = grid[previous.X + 1, previous.Y];
@@ -359,11 +367,9 @@ namespace day3
 						current = Direction.up;
 						stepsInCurrentSpiral += 2;
 					}
-
-
-
 				}
 			}
+			return 0; 
 		}
 
 		public int CalculateSteps(int number)
