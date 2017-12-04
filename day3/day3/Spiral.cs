@@ -290,7 +290,7 @@ namespace day3
 				return RightGridCornerX(i, j); 
 			if (i == gridcorner && j != 0 && j != gridcorner)
 				return RightEdgeX(i, j);
-			if (i == gridcorner && j == gridcorner)
+			if (i == gridcorner && j == 0)
 				return RightCornerX(i, j);
 			if (i != 0 && i != gridcorner && j == 0)
 				return TopGridEdgeX(i, j); 
@@ -352,7 +352,8 @@ namespace day3
 					else if (current == Direction.right && i != size)
 					{
 						i++;
-						grid[previous.X + 1, previous.Y] = new Coordinates(previous.X + 1, previous.Y, i);
+						grid[previous.X + 1, previous.Y] = new Coordinates(previous.X + 1, previous.Y,
+							GetMatrixValues(previous.X + 1, previous.Y));
 						previous = grid[previous.X + 1, previous.Y];
 						stepcounter++;
 						current = Direction.up;
